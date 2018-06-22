@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+  <body>
+    <div id="app">
+      <!-- displayed while loadng to prevent unwanted user actions -->
+      <div v-if="status=='loading'" style="position:fixed;width:100vw;height:100vh;opacity:0"></div>
+      <!-- this is the home page -->
+      <nav class="navbar navbar-light justify-content-center">
+        <span class="navbar-brand">{{page}}</span>
+      </nav>
+      <div v-if="page=='home'" class="container-fluid main-container">
+        <div class="row">
+          <div class="col-lg-12">        
+            <button class="btn btn-primary" v-on:click="go('login')" v-if="!user.logged">Login</button>
+            <button class="btn btn-primary" v-on:click="logout()" v-if="user.logged">Logout</button>
+            <button class="btn btn-primary" v-on:click="go('search')" v-if="user.logged">Search</button>
+            <button class="btn btn-warning" v-on:click="reload_package()">Reload Package</button>
+          </div>
+        </div>
+      </div>
+      <!-- this is the login page -->
+      <div v-if="page=='login'" class="container-fluid main-container">
+        <div class="row">
+          <div class="col-lg-12">        
+            <input class="form-control" v-model="user.email" placeholder="email">
+            <input class="form-control" v-model="user.password" placeholder="password" type="password">
+            <button class="btn btn-primary" v-on:click="login()">Login</button>
+            <button class="btn btn-primary" v-on:click="go('home')">Back Home</button>
+            <p>Try a random email and password</p>
+          </div>
+        </div>
+      </div>
+      <!-- this is the search page -->
+      <div v-if="page=='search'" class="container-fluid main-container">
+        <div class="row">
+          <input class="form-control" v-model="keyword" placeholder="search keyword">
+          <button class="btn btn-primary" v-on:click="go('results',keyword)" v-if="keyword.length>2">Search</button>
+          <button class="btn btn-primary" v-on:click="go('home')">Back Home</button>
+        </div>
+      </div>
+      <!-- this is the search results page -->
+      <div v-if="page=='results'" class="container-fluid main-container">
+        <div class="row">
+          <div class="col-lg-12">                      
+            <table class="table">
+              <tr v-for="item in items">
+                <td>{{item}}</td>
+              </tr>
+            </table>
+            <div v-if="items.length==0">No results</div>
+            <button class="btn btn-primary" v-on:click="go('home')">Back Home</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="js/sugar.min.js"></script> 
+  <script src="js/vue.min.js"></script> 
+  <script src="js/axios.min.js"></script> 
+  <script src="js/custom.js"></script> 
+</html>

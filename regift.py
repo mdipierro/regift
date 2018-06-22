@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import argparse
 import time
 import datetime
@@ -117,13 +119,14 @@ def build(appname, config_filename):
             if data1 != data:
                 logging.info('modified: %s' % filename)
             open(filename, 'wb').write(data1)
-
+        
     if os.path.exists(base+'/smali/io/cordova/hellocordova'):
         os.rename(base+'/smali/io/cordova/hellocordova', base+'/smali/io/cordova/'+config['name'])
 
     # recompile it
     target = base+'-signed.apk'
     assert compile(base, target)
+    os.system('rm -r %s' % base)
 
     # sign it and generate keystore if necessary (prompts for passwd)
     if not os.path.exists('%s.keystore' % base):
@@ -136,10 +139,26 @@ def build(appname, config_filename):
         os.rename(tmp, target)
     logging.info('done')
 
+def build_default(folder):
+    base = 'default.new'
+
+    # decomple the default apk
+    os.system('cp tools/apps/default.apk ./%s.apk' % base)
+    assert decompile(base+'.apk')
+    
+    os.system('cp -r %s/* %s/assets/www/' % (folder, base))
+            
+    # recompile it
+    assert compile(base, base+'.apk')
+    os.system('rm -r %s' % base)
+    logging.info('done')
+
 # logic for packaging
 
 def encode_image(filename):
     extension = filename.split('.')[-1].lower()
+    if not os.path.exists(filename):
+        return filename
     data = open(filename).read()
     if extension=='ttf':
         return 'data:font/ttf;base64,' + data
@@ -235,6 +254,8 @@ def main():
         package(args.filename)
     elif args.command == 'build':
         build(args.filename, args.config_filename)
+    elif args.command == 'build-default':
+        build_default(args.filename)
     elif args.command == 'serve':
         serve(args.filename)
     else:
