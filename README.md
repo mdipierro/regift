@@ -71,32 +71,6 @@ $ ../../../regift.py package index.html
 
 Now copy package.json to your server and the URL http://yourdomain/example2/package.json so that the apk can find it.
 
+### tips
 
-
-### Refrences
-
-https://medium.com/js-dojo/7-ways-to-define-a-component-template-in-vuejs-c04e0c72900d
-https://stackoverflow.com/questions/1191989/create-ipa-for-iphone
-https://stackoverflow.com/questions/2097813/how-to-parse-the-androidmanifest-xml-file-inside-an-apk-package
-https://github.com/QyMars/apktool-python/blob/master/unpackging.py
-https://source.codeaurora.org/external/gigabyte/ag-gb-dsds-7227/plain/build/tools/releasetools/common.py
-https://uigradients.com/#KokoCaramel
-https://coderwall.com/p/qwqpnw/resign-ipa-with-new-cfbundleidentifier-and-certificate
-
-https://stackoverflow.com/questions/30370320/renaming-of-ipa-app-name
-
-
-# make package.json
-cd statc/examples/example1
-regift.py package index.html > package.json
-
-# serve the static filed
-regift.py serve static/
-
-# make default.apk
-cd default 
-make build
-
-regift.py build default.apk
-package_url: http://{domain}/statc/examples/example1/package.json
-
+click on the spinner to force a reload of a package.json from server
