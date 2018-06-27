@@ -1,25 +1,19 @@
 # what is regift
 
-Regift is a tool that tels you build Android APK using html+css+js without need for addtional third party tools.
-The apps build with regft will also update themselvers automatically from your web site, bypassing the stores.
+Regift is a tool that lets you build an Android APK using html+css+js without need for third party tools.
+The apps built with regft will also update themselvers automatically from your web site, bypassing the app store.
 
 Regift comprises of three parts:
 
-- the first is a tool that allows you to customize a vanilla APK that was pre-build with cordova. This step does not require that you have cordova installed nor that you have Andoird Studio installed. The customized app is a particular app that has the ability to download code from a URL that you must specify. Upon startup the customized app will connect to your web server, download this code, cache it locally, then start. This code must be stored in a file called 'package.json'.
+- the first is a tool (regift build) that allows you to customize a vanilla APK that was pre-built with cordova. This step does not require that you have cordova installed nor that you have Andoird Studio installed. The customized (regifted) app is a particular app that has the ability to download code remotely from a URL that you must specify. Upon startup the customized app will connect to your web server, download this code, cache it locally, then start. This code must be stored in a file called 'package.json', on your server.
 
-- the second is a tool that allows you to create a 'package.json' from almost any single page web application.
+- the second is a tool (regift package) that allows you to create a 'package.json' from almost any single page web application.
 
+- the third is a sample app (example2) built with vue.js which you can package and delver to your regifted apps.
 
+### How is regift different from Cordova?
 
-## how does it work?
-
-Regift comprises of about 3 different components:
-- the first a ready made Androd app that you can customze and redstribute but does not need recompilation.
-- the second is mechanism for packaging almost any simple page web app and 
-
-## How is regft different from Cordova
-
-Regift is based on cordova a cordova app and outputs a cordova app but it is desgned to run 
+regift ships with an app built wth cordova. It then customize this app to run your singl page web app. yet it does not requre that you have corodova. There is more to regift than the cordova app anyway.
 
 ## Example of usage (example1)
 
